@@ -25,34 +25,18 @@
       android:progress="0"
       />
 
-    <FrameLayout
+    <ProgressBar
+      android:id="@+id/pb_hori"
+      style="@android:style/Widget.ProgressBar.Horizontal"
       android:layout_width="250dp"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:layout_marginTop="20dp"
-      >
-
-      <ProgressBar
-        android:id="@+id/pb_hori"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:max="100"
-        android:minHeight="50dp"
-        android:progress="0"
-        android:progressDrawable="@drawable/pb_hori_bg"
-        />
-
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:text="当前进度"
-        android:textSize="20sp"
-        />
-
-    </FrameLayout>
+      android:max="100"
+      android:minHeight="50dp"
+      android:progress="0"
+      android:progressDrawable="@drawable/pb_hori_bg"
+      />
 
     <ProgressBar
       android:id="@+id/pb_hori_send"
@@ -69,7 +53,7 @@
     <com.caijinfu.customizeprogressbar.CoolProgressBar
       android:id="@+id/cpb_hori"
       style="@android:style/Widget.ProgressBar.Horizontal"
-      android:layout_width="100dp"
+      android:layout_width="250dp"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:layout_marginTop="20dp"
