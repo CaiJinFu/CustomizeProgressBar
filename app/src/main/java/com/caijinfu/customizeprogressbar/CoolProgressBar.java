@@ -1,9 +1,8 @@
 package com.caijinfu.customizeprogressbar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -21,6 +20,8 @@ public class CoolProgressBar extends ProgressBar {
 
   private final TextPaint mPaint = new TextPaint();
   private String mText;
+  private float mTextSize = 18;
+  private int mTextColor = 0xff4d4d4d;
 
   public CoolProgressBar(Context context) {
     this(context, null);
@@ -32,13 +33,20 @@ public class CoolProgressBar extends ProgressBar {
 
   public CoolProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    init();
+    init(attrs);
   }
 
-  private void init() {
+  private void init(AttributeSet attrs) {
+    TypedArray attribute = getContext().obtainStyledAttributes(attrs, R.styleable.CoolProgressBar);
+    mTextColor = attribute.getColor(R.styleable.CoolProgressBar_textColor, mTextColor);
+    mTextSize =
+        attribute.getDimension(
+            R.styleable.CoolProgressBar_textSize, DensityUtil.sp2px(getContext(), 18));
+    mText = attribute.getString(R.styleable.CoolProgressBar_text);
+    attribute.recycle();
     mPaint.setAntiAlias(true);
-    mPaint.setColor(Color.RED);
-    mPaint.setTextSize(50);
+    mPaint.setColor(mTextColor);
+    mPaint.setTextSize(mTextSize);
   }
 
   @Override

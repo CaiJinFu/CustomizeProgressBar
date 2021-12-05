@@ -2,6 +2,7 @@ package com.caijinfu.customizeprogressbar;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
   private CoolProgressBar mCPbHori;
   private int mProgress = 10;
 
-  private Handler mHandler = new Handler();
+  private Handler mHandler = new Handler(Looper.myLooper());
   private Runnable mRunnable =
       new Runnable() {
         @Override
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
           mProgress++;
           mCPbHori.setProgress(mProgress);
           NumberFormat percentInstance = NumberFormat.getPercentInstance();
+          percentInstance.setGroupingUsed(false);
           String text;
           if (mProgress == 100) {
             text = "加载完成";
