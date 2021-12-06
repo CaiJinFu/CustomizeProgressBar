@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import androidx.core.content.ContextCompat;
+
 /**
  * 自定义的带进度显示的ProgressBar
  *
@@ -20,8 +22,8 @@ public class CoolProgressBar extends ProgressBar {
 
   private final TextPaint mPaint = new TextPaint();
   private String mText;
-  private float mTextSize = 18;
-  private int mTextColor = 0xff4d4d4d;
+  private float mTextSize;
+  private int mTextColor;
 
   public CoolProgressBar(Context context) {
     this(context, null);
@@ -38,10 +40,13 @@ public class CoolProgressBar extends ProgressBar {
 
   private void init(AttributeSet attrs) {
     TypedArray attribute = getContext().obtainStyledAttributes(attrs, R.styleable.CoolProgressBar);
-    mTextColor = attribute.getColor(R.styleable.CoolProgressBar_textColor, mTextColor);
+    mTextColor =
+        attribute.getColor(
+            R.styleable.CoolProgressBar_textColor,
+            ContextCompat.getColor(getContext(), R.color.black));
     mTextSize =
         attribute.getDimension(
-            R.styleable.CoolProgressBar_textSize, DensityUtil.sp2px(getContext(), 18));
+            R.styleable.CoolProgressBar_textSize, DensityUtil.sp2px(getContext(), 16));
     mText = attribute.getString(R.styleable.CoolProgressBar_text);
     attribute.recycle();
     mPaint.setAntiAlias(true);
@@ -70,13 +75,13 @@ public class CoolProgressBar extends ProgressBar {
     } else if (textHeight > height) {
       height = textHeight + 50;
     }
-    Log.i("TAG", "width: " + width);
-    Log.i("TAG", "height: " + height);
+    Log.i("TAG", "setWidth: " + width);
+    Log.i("TAG", "setHeight: " + height);
     setMeasuredDimension(width, height);
   }
 
   private int measureWidth(int measureSpec) {
-    int result = 200;
+    int result = DensityUtil.dp2px(getContext(), 50);
     int specMode = MeasureSpec.getMode(measureSpec);
     int specSize = MeasureSpec.getSize(measureSpec);
     switch (specMode) {
@@ -96,7 +101,7 @@ public class CoolProgressBar extends ProgressBar {
   }
 
   private int measureHeight(int measureSpec) {
-    int result = 200;
+    int result = DensityUtil.dp2px(getContext(), 30);
     int specMode = MeasureSpec.getMode(measureSpec);
     int specSize = MeasureSpec.getSize(measureSpec);
     switch (specMode) {
